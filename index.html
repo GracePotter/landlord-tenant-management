@@ -1,0 +1,1050 @@
+<!-- Summer Exam Coding Assignment - Frontend -->
+<!-- Browser: Edge/Chrome/Firefox, Operating System: Windows -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Landlord-Tenant Management System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Import Bootstrap and JQuery -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100..900;1,100..900&family=Itim&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Lilita+One&family=Rubik:ital,wght@0,300..900;1,300..900&family=Special+Elite&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>    
+        body { font-size: 13.5px; font-family: "Itim", cursive; font-weight: 500; font-style: normal;}    
+        input, select { 
+            padding: 0; 
+            width: 200px; 
+            height: 18px; 
+            border-radius: 5px; 
+            border-width: 1px;
+            padding-left: 2px;
+        }
+        input:focus, select:focus {
+            outline:#737373
+        }
+        input[type="submit"] { 
+            padding-top: 0; 
+            width: 60px; 
+            height: 23px; 
+            border: 1.5px solid #cc3300;
+            background-color: white;
+            border-radius: 10px;
+            color:#cc3300;
+            height: 20px;
+            line-height: 10px;
+            font-weight: 2px;
+            font-size: 15px;
+        }
+        input[type="submit"]:hover {            
+            background-color:#e63900;
+            color: white;
+        }
+        input[type="submit"]:active {            
+            background-color:#cc3300;
+            color: white;
+        }
+        td { padding-bottom: 3px; }
+        #tenantList td {border: 1px solid black; padding: 0;}
+        #landlordList td {border: 1px solid black; padding: 0; } 
+        #contractList td {border: 1px solid black; padding: 0; }
+        a { text-decoration: underline; color:#cc3300; }
+        .systemTitle {            
+            font-size: 20.5px;
+            font-style: normal; 
+            color: #cc3300;
+            font-weight: 500;
+        }
+        .note {
+            /* font-family: "Libre Baskerville", serif; */
+            font-family: "Trebuchet MS";
+            font-size: 13px;
+            color: gray;
+            font-weight: bolder;
+        }
+        .subtitle {
+            font-size:15px; 
+            font-weight: 600; 
+            color: #737373;
+        }
+    </style>
+</head>
+<body>
+    <table style="margin: auto auto auto 15px;">
+        <tr><td colspan="3" style="text-align: center; padding:0; height: 10px;">
+            <label class="systemTitle" >LANDLORD-TENANT MANAGEMENT SYSTEM</label></td></tr>
+        <tr style="border-bottom: 2px #e6e6e6 solid; vertical-align: top;">
+        <td style="width: 400px;">
+            <b class="subtitle">Add / Update / Delete A Tenant</b><br/><br/><table>
+            <tr><td style="width:110px">Title:</td><td><select id="tenantTitle" name="tenantTitle">
+                <option value="">--Please Select--</option>
+                <option value="Mx">Mx</option>
+                <option value="Ms">Ms</option>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr">Dr</option>
+                <option value="Other">Other (specify)</option>
+                </select><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr id="trTenantOtherTitle" style="display: none;"><td>Other Title:</td>
+                <td><input id="tenantOtherTitle" name="tenantOtherTitle" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>First Name:</td><td><input id="tenantFirstName" name="tenantFirstName" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Surname:</td><td><input id="tenantSurName" name="tenantSurName" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Phone Number:</td><td><input id="tenantPhone" name="tenantPhone" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Email Address:</td><td><input id="tenantEmail" name="tenantEmail"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Address Line 1:</td><td><input id="tenantAddress1" name="tenantAddress1" placeholder="Home Address Line 1"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Address Line 2:</td><td><input id="tenantAddress2" name="tenantAddress2" placeholder="Home Address Line 2"></td></tr>
+            <tr><td>Town:</td><td><input id="tenantTown" name="tenantTown" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Country/City:</td><td><input id="tenantCountryCity" name="tenantCountryCity" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>EIRCODE:</td><td><input id="tenantEircode" name="tenantEircode" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>            
+            <tr><td>Tenant ID:</td><td><input id="tenantId" name="tenantId" disabled></td></tr>
+            </table><br/>                
+            <input id="btnAddTenant" type="submit" value="Add">
+            <input id="btnUpdateTenant" type="submit" value="Update" disabled>
+            <input id="btnDeleteTenant" type="submit" value="Delete" disabled>
+            <input id="btnResetTenant" type="submit" value="Reset" onclick="clearTenant()">
+            <label class="note" style="margin-top: 5px; font-weight: normal;">
+                Note: If you want to update or delete, <br/>please click 'Edit' in the list first!</label>        
+        </td>
+        <td style="width: 400px">
+            <b class="subtitle">Add / Update / Delete A Landlord</b><br/><table>
+            <tr><td style="width:115px">Title:</td><td><select id="landlordTitle" name="landlordTitle">
+                <option value="">--Please Select--</option>
+                <option value="Mx">Mx</option>
+                <option value="Ms">Ms</option>
+                <option value="Mr">Mr</option>
+                <option value="Mrs">Mrs</option>
+                <option value="Miss">Miss</option>
+                <option value="Dr">Dr</option>
+                <option value="Other">Other (specify)</option>
+                </select><b style="color: #ff8c66;"> *</b></td>
+            </tr>
+            <tr id="trLandlordOtherTitle" style="display:none;"><td>Other Title:</td>
+                <td><input id="landlordOtherTitle" name="landlordOtherTitle" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>First Name:</td><td><input id="landlordFirstName" name="landlordFirstName" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Surname:</td><td><input id="landlordSurName" name="landlordSurName" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Phone Number:</td><td><input id="landlordPhone" name="landlordPhone" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Email Address:</td><td><input id="landlordEmail" name="landlordEmail"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Address Line 1:</td><td><input id="landlordAddress1" name="landlordAddress1" 
+                placeholder="Home Address Line 1"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Address Line 2:</td><td><input id="landlordAddress2" name="landlordAddress2" 
+                placeholder="Home Address Line 2"></td></tr>
+            <tr><td>Town:</td><td><input id="landlordTown" name="landlordTown" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Country/City:</td><td><input id="landlordCountryCity" name="landlordCountryCity" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>EIRCODE:</td><td><input id="landlordEircode" name="landlordEircode" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>  
+            <tr><td>Date of Birth:</td><td><input id="landlordDOB" name="landlordDOB" 
+                style="width:120px" placeholder="DD/MM/YYYY"><b style="color: #ff8c66;"> *</b></td></tr>   
+            <tr><td>Rent Permission:</td><td><select title="Permission to rent properties from the council"
+                    id="landlordPermissionRent" name="landlordPermissionRent">
+                <option value="">--Please Select--</option>
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+                </select><b style="color: #ff8c66;"> *</b></td></tr>  
+            <tr><td>Can Contact?</td><td><select title="Permission for tenants to contact the landlord via email"
+                id="landlordPermissionContact" name="landlordPermissionContact">
+                <option value="">--Please Select--</option>
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+                </select><b style="color: #ff8c66;"> *</b></td></tr>       
+            <tr><td>Landlord ID:</td><td><input id="landlordId" name="landlordId" disabled></td></tr>
+            </table>                
+            <input id="btnAddLandlord" type="submit" value="Add" >
+            <input id="btnUpdateLandlord" type="submit" value="Update" disabled>
+            <input id="btnDeleteLandlord" type="submit" value="Delete" disabled>
+            <input id="btnResetLandlord" type="submit" value="Reset" onclick="clearLandlord()">
+            <br/>
+        </td>
+        <td style="width: 400px">
+            <b class="subtitle">Add / Update / Delete A Contract</b><br/><br/><table>
+            <tr><td style="width:120px">Contract Date:</td>
+            <td><input id="contractDate" name="contractDate" style="width:120px" placeholder="DD/MM/YYYY"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Proterty Address:</td><td><input id="contractAddress" name="contractAddress" placeholder="Proterty Address"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Landlord ID:</td><td><input id="contractLandlordId" name="contractLandlordId"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Tenant 1 ID:</td><td><input id="contractTenantId1" name="contractTenantId1"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Tenant 2 ID:</td><td><input id="contractTenantId2" name="contractTenantId2"></td></tr>
+            <tr><td>Tenant 3 ID:</td><td><input id="contractTenantId3" name="contractTenantId3"></td></tr>
+            <tr><td>Monthly Fee (€):</td><td><input id="contractFee" name="contractFee" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Door Number:</td><td><input id="contractDoorNumber" name="contractDoorNumber" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Contract Length:</td><td><select id="contractLength" name="contractLength">
+                <option value="">--Please Select--</option>
+                <option value="Month">Month</option>
+                <option value="Year">Year</option>
+                <option value="Permanent">Permanent</option>
+                </select><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Property Type:</td><td><select id="contractType" name="contractType">
+                <option value="">--Please Select--</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Semi-Detached">Semi-Detached</option>
+                <option value="Detached">Detached</option>
+                <option value="Other">Other (specify)</option>
+                </select><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr id="trContractOtherType" style="display:none;"><td>Other Type:</td>
+            <td><input id="contractOtherType" name="contractOtherType" style="width:120px"><b style="color: #ff8c66;"> *</b></td></tr>
+            <tr><td>Contract ID:</td><td><input id="contractId" name="contractId" disabled></td></tr>
+            </table><br/>                
+            <input id="btnAddContract" type="submit" value="Add">
+            <input id="btnUpdateContract" type="submit" value="Update" disabled>
+            <input id="btnDeleteContract" type="submit" value="Delete" disabled>
+            <input id="btnResetContract" type="submit" value="Reset" onclick="clearContract()">
+            <br/>
+        </td>
+    </tr>
+    <tr style="vertical-align: top;">
+        <td><b class="subtitle">Search Tenants</b><br/><table>                
+        <tr><td style="width:110px">Tenant ID:</td><td><input id="tenantIdSearch" name="tenantIdSearch"></td></tr>
+        <tr><td colspan="2"><input id="btnSearchTenant" type="submit" value="Search"></td></tr>
+        <tr><td colspan="2"><div style="overflow-x: scroll; width: 312px;">
+        <table id="tenantList" name="tenantList" style="width:430px; margin-top:1px;">
+            <tr style="text-align: center; background-color: lightgray;">                
+                <td style="width:40px;">Edit</td><td>Tenant ID</td>
+                <td style="width:100px">First Name</td><td style="width:100px">Surname</td>
+            </tr></table></div></td></tr>
+        </table></td>
+        <td><b class="subtitle">Search Landlords</b><br/><table>                
+        <tr><td style="width:110px">Landlord ID:</td><td><input id="landlordIdSearch" name="landlordIdSearch"></td></tr>
+        <tr><td colspan="2"><input id="btnSearchLandlord" type="submit" value="Search"></td></tr>
+        <tr><td colspan="2"><div style="overflow-x: scroll; width: 312px;">
+        <table id="landlordList" name="landlordList" style="width:430px; margin-top:1px;">
+            <tr style="text-align: center; background-color: lightgray;">                
+                <td style="width:40px">Edit</td><td>Landlord ID</td>
+                <td style="width:100px">First Name</td><td style="width:100px">Surname</td>                
+            </tr></table></div></td></tr>
+        </table></td>
+        <td><b class="subtitle">Search Contracts</b><br/><table>                
+        <tr><td style="width:110px">Contract ID:</td><td><input id="contractIdSearch" name="contractIdSearch"></td></tr>
+        <tr><td colspan="2"><input id="btnSearchContract" type="submit" value="Search"></td></tr>
+        <tr><td colspan="2"><div style="overflow-x: scroll; width: 312px;">
+        <table id="contractList" name="tenantList" style="width:430px; margin-top:1px;">
+            <tr style="text-align: center; background-color: lightgray;">                
+                <td style="width:40px">Edit</td><td>Contract ID</td>
+                <td style="width:200px">Proterty Address</td>                
+            </tr></table></div></td></tr>
+        </table></td>
+    </tr></table></table><br/>
+    <script>
+    $(document).ready(function () { 
+
+        // Load all data while refreshing the page
+        searchTenants($("#tenantIdSearch").val(), false); 
+        searchLandlords($("#landlordIdSearch").val(), false); 
+        searchContracts($("#contractIdSearch").val()); 
+
+        // When select Other, display other title for tenant
+        $("#tenantTitle").change(function(){
+            if ($(this).val() == "Other") {
+                $("#trTenantOtherTitle").show();
+            } else {
+                $("#trTenantOtherTitle").hide();
+            }
+        });
+
+        // When select Other, display other title for landlord
+        $("#landlordTitle").change(function(){
+            if ($(this).val() == "Other") {
+                $("#trLandlordOtherTitle").show();
+            } else {
+                $("#trLandlordOtherTitle").hide();
+            }
+        });
+
+        // When select Other, display other type for contract
+        $("#contractType").change(function(){
+            if ($(this).val() == "Other") {
+                $("#trContractOtherType").show();
+            } else {
+                $("#trContractOtherType").hide();
+            }
+        });
+
+        // Add a new tenant
+        $("#btnAddTenant").click(function(e) { 
+            // Mandory check         
+            if (checkTenant() == false) {                
+                return false;
+            }
+            var tenant = getTenant();
+            $.ajax ({
+                type: 'POST',
+                url: 'http://localhost:9000/api/tenants',
+                data: tenant, //JSON.stringfy(tenant)
+                success: function(response) {
+                    // alert("Successfully created a new tenant!");
+                    alert(response.message);
+                    clearTenant();
+                    searchTenants($("#tenantIdSearch").val(), false);
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to create a new tenant!");
+                }
+            })
+            e.preventDefault(); 
+        });
+
+        // Add a new landlord
+        $("#btnAddLandlord").click(function(e) {   
+            // Mandory check         
+            if (checkLandlord() == false) {                
+                return false;
+            }
+            var landlord = getLandlord();
+            $.ajax ({
+                type: 'POST',
+                url: 'http://localhost:9000/api/landlords',
+                data: landlord, 
+                success: function(response) {
+                    alert(response.message);
+                    clearLandlord();
+                    searchLandlords($("#landlordIdSearch").val(), false);
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to create a new tenant!");
+                }
+            })
+            e.preventDefault(); 
+        });
+
+        // Add a new contract
+        $("#btnAddContract").click(function(e) {   
+            // Mandory check         
+            if (checkContract() == false) {                
+                return false;
+            }
+            // Check if Tenant ID and Landlord ID exist
+            if (searchLandlords($("#contractLandlordId").val(), true) == false ||
+                searchTenants($("#contractTenantId1").val(), true) == false ||
+                searchTenants($("#contractTenantId2").val(), true) == false ||
+                searchTenants($("#contractTenantId3").val(), true) == false ) { 
+                return false;                
+            }              
+            var contract = getContract();
+            $.ajax ({
+                type: 'POST',
+                url: 'http://localhost:9000/api/contracts',
+                data: contract, 
+                success: function(response) {
+                    e.preventDefault(); 
+                    alert(response.message);
+                    clearContract();
+                    searchContracts($("#contractIdSearch").val());
+
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to create a new tenant!");
+                }
+            })
+            e.preventDefault(); 
+        });
+
+        // Search tenants
+        $("#btnSearchTenant").click(function(e) {
+            searchTenants($("#tenantIdSearch").val(), false);
+            e.preventDefault(); 
+        });
+
+        // Search landlords
+        $("#btnSearchLandlord").click(function(e) {
+            searchLandlords($("#landlordIdSearch").val(), false);
+            e.preventDefault(); 
+        });
+
+        // Search contracts
+        $("#btnSearchContract").click(function(e) {
+            searchContracts($("#contractIdSearch").val());
+            e.preventDefault(); 
+        });
+
+        // Update a tenant by _id
+        $("#btnUpdateTenant").click(function(e) {
+            var tenant = getTenant();
+            $.ajax({
+                type: 'PUT',
+                url: 'http://localhost:9000/api/tenants/' + $("#tenantId").val(),
+                data: tenant,
+                success: function(response) {
+                    // alert("Successfully updated the tenant!");
+                    alert(response.message);
+                    searchTenants($("#tenantIdSearch").val(), false); 
+                    $("#btnAddTenant").removeAttr("disabled");
+                    $("#btnDeleteTenant").removeAttr("disabled");
+                    $("#btnUpdateTenant").removeAttr("disabled");
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to update the tenant!");
+                }
+            })
+            e.preventDefault();                
+        }); 
+
+        // Update a landlord by _id
+        $("#btnUpdateLandlord").click(function(e) {
+            var landlord = getLandlord();
+            $.ajax({
+                type: 'PUT',
+                url: 'http://localhost:9000/api/landlords/' + $("#landlordId").val(),
+                data: landlord,
+                success: function(response) {
+                    alert(response.message);
+                    searchLandlords($("#landlordIdSearch").val(), false); 
+                    $("#btnAddLandlord").removeAttr("disabled");
+                    $("#btnDeleteLandlord").removeAttr("disabled");
+                    $("#btnUpdateLandlord").removeAttr("disabled");
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to update the landlord!");
+                }
+            })
+            e.preventDefault();                
+        }); 
+
+        // Update a contract by _id
+        $("#btnUpdateContract").click(function(e) {            
+            var contract = getContract();
+            $.ajax({
+                type: 'PUT',
+                url: 'http://localhost:9000/api/contracts/' + $("#contractId").val(),
+                data: contract,
+                success: function(response) {
+                    alert(response.message);
+                    searchContracts($("#contractIdSearch").val()); 
+                    $("#btnAddContract").removeAttr("disabled");
+                    $("#btnDeleteContract").removeAttr("disabled");
+                    $("#btnUpdateContract").removeAttr("disabled");
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to update the contract!");
+                }
+            })
+            e.preventDefault();                
+        }); 
+
+        // Delete a tenant by _id
+        $('#btnDeleteTenant').click(function(e) {
+            $.ajax({
+                type: 'DELETE',
+                url: 'http://localhost:9000/api/tenants/' + $("#tenantId").val(),
+                success: function(response) {
+                    // alert("Successfully deleted the tenant!");
+                    alert(response.message);
+                    clearTenant();
+                    searchTenants($("#tenantIdSearch").val(), false);
+                    $("#btnAddTenant").removeAttr("disabled");
+                    $("#btnDeleteTenant").attr("disabled", "disabled");
+                    $("#btnUpdateTenant").attr("disabled", "disabled");
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to delete the tenant!");
+                }
+            })
+            e.preventDefault();                
+        }); 
+
+        // Delete a landlord by _id
+        $('#btnDeleteLandlord').click(function(e) {
+            $.ajax({
+                type: 'DELETE',
+                url: 'http://localhost:9000/api/landlords/' + $("#landlordId").val(),
+                success: function(response) {
+                    alert(response.message);
+                    clearLandlord();
+                    searchLandlords($("#landlordIdSearch").val(), false);
+                    $("#btnAddLandlord").removeAttr("disabled");
+                    $("#btnDeleteLandlord").attr("disabled", "disabled");
+                    $("#btnUpdateLandlord").attr("disabled", "disabled");
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to delete the landlord!");
+                }
+            })
+            e.preventDefault();                
+        }); 
+
+        // Delete a contract by _id
+        $('#btnDeleteContract').click(function(e) {
+            $.ajax({
+                type: 'DELETE',
+                url: 'http://localhost:9000/api/contracts/' + $("#contractId").val(),
+                success: function(response) {
+                    alert(response.message);
+                    clearContract();
+                    searchContracts($("#contractIdSearch").val());
+                    $("#btnAddContract").removeAttr("disabled");
+                    $("#btnDeleteContract").attr("disabled", "disabled");
+                    $("#btnUpdateContract").attr("disabled", "disabled");
+                },
+                error: function(xhr, status, error) {
+                    alert("Failed to delete the contract!");
+                }
+            })
+            e.preventDefault();                
+        }); 
+    });
+
+    // Mandatory check for tenant form
+    function checkTenant() {
+        if ($("#tenantTitle").val() == "") {
+            alert("Title cannot be empty!");
+            return false;
+        }
+        if ($("#tenantTitle").val() == "Other" && $.trim($("#tenantOtherTitle").val()) == "") {
+            alert("Other Title cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#tenantFirstName").val()) == "") {
+            alert("First Name cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#tenantSurName").val()) == "") {
+            alert("Surname cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#tenantPhone").val()) == "") {
+            alert("Phone Number cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#tenantEmail").val()) == "") {
+            alert("Email Address cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#tenantAddress1").val()) == "") {
+            alert("Address Line 1 cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#tenantTown").val()) == "") {
+            alert("Town cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#tenantCountryCity").val()) == "") {
+            alert("Country/City cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#tenantEircode").val()) == "") {
+            alert("EIRCODE cannot be empty!");
+            return false;
+        }
+        return true;
+    }
+
+    // Mandatory check for landlord form
+    function checkLandlord() {
+        if ($("#landlordTitle").val() == "") {
+            alert("Title cannot be empty!");
+            return false;
+        }
+        if ($("#landlordTitle").val() == "Other" && $.trim($("#landlordOtherTitle").val()) == "") {
+            alert("Other Title cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordFirstName").val()) == "") {
+            alert("First Name cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordSurName").val()) == "") {
+            alert("Surname cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordPhone").val()) == "") {
+            alert("Phone Number cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordEmail").val()) == "") {
+            alert("Email Address cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordAddress1").val()) == "") {
+            alert("Address Line 1 cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordTown").val()) == "") {
+            alert("Town cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordCountryCity").val()) == "") {
+            alert("Country/City cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordEircode").val()) == "") {
+            alert("EIRCODE cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordDOB").val()) == "") {
+            alert("Date of Birth cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordPermissionRent").val()) == "") {
+            alert("Rent Permission cannot be empty!");
+            return false;
+        }
+        if ($.trim($("#landlordPermissionContact").val()) == "") {
+            alert("Can Contact cannot be empty!");
+            return false;
+        }
+        return true;
+    }
+
+    // Mandatory check for contract form
+    function checkContract() {
+        if ($("#contractDate").val() == "") {
+            alert("Contract Date cannot be empty!");
+            return false;
+        }
+        if ($("#contractAddress").val() == "") {
+            alert("Proterty Address be empty!");
+            return false;
+        }
+        if ($("#contractLandlordId").val() == "") {
+            alert("Landlord ID cannot be empty!");
+            return false;
+        }
+        if ($("#contractTenantId1").val() == "") {
+            alert("Tenant 1 ID cannot be empty!");
+            return false;
+        }
+        if ($("#contractFee").val() == "") {
+            alert("Monthly Fee (€) cannot be empty!");
+            return false;
+        }
+        if ($("#contractDoorNumber").val() == "") {
+            alert("Door Number cannot be empty!");
+            return false;
+        }
+        if ($("#contractLength").val() == "") {
+            alert("Contract Length cannot be empty!");
+            return false;
+        }
+        if ($("#contractDoorNumber").val() == "") {
+            alert("Door Number cannot be empty!");
+            return false;
+        }
+        if ($("#contractType").val() == "") {
+            alert("Property Type cannot be empty!");
+            return false;
+        }
+        if ($("#contractType").val() == "Other" && $.trim($("#contractOtherType").val()) == "") {
+            alert("Other Type cannot be empty!");
+            return false;
+        }
+        return true;
+    }
+
+    // Get all value from tenant form, return JSON
+    function getTenant() {
+        var tenant = {
+            "title": $("#tenantTitle").val(),
+            "other_title": $("#tenantOtherTitle").val(),
+            "first_name": $("#tenantFirstName").val(),
+            "surname": $("#tenantSurName").val(),
+            "phone_number": $("#tenantPhone").val(),
+            "email_address": $("#tenantEmail").val(),    
+            "address_line_1": $("#tenantAddress1").val(),
+            "address_line_2": $("#tenantAddress2").val(),
+            "town": $("#tenantTown").val(),
+            "country_city": $("#tenantCountryCity").val(),
+            "eircode": $("#tenantEircode").val()
+        };
+        return tenant;
+    }
+
+    // Get all value from landlord form, return JSON
+    function getLandlord() {
+        var tenant = {
+            "title": $("#landlordTitle").val(),
+            "other_title": $("#landlordOtherTitle").val(),
+            "first_name": $("#landlordFirstName").val(),
+            "surname": $("#landlordSurName").val(),
+            "phone_number": $("#landlordPhone").val(),
+            "email_address": $("#landlordEmail").val(),    
+            "address_line_1": $("#landlordAddress1").val(),
+            "address_line_2": $("#landlordAddress2").val(),
+            "town": $("#landlordTown").val(),
+            "country_city": $("#landlordCountryCity").val(),
+            "eircode": $("#landlordEircode").val(),
+            "date_of_birth": $("#landlordDOB").val(),
+            "permission_rent": $("#landlordPermissionRent").val(),
+            "permission_contact": $("#landlordPermissionContact").val()
+        };
+        return tenant;
+    }
+
+    // Get all value from contract form, return JSON
+    function getContract() {
+        var contract = {
+            "contract_date": $("#contractDate").val(),
+            "contract_address": $("#contractAddress").val(),
+            "landlord_id": $("#contractLandlordId").val(),
+            "tenant_id_1": $("#contractTenantId1").val(),
+            "tenant_id_2": $("#contractTenantId2").val(),
+            "tenant_id_3": $("#contractTenantId3").val(),    
+            "contract_fee": $("#contractFee").val(),
+            "door_number": $("#contractDoorNumber").val(),
+            "contract_length": $("#contractLength").val(),
+            "type": $("#contractType").val(),
+            "other_type": $("#contractOtherType").val()
+        };
+        return contract;
+    }
+
+    // Display a tenant details from list by _id
+    function editTenant(id) {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:9000/api/tenants/" + id,
+            success: function(response) {
+                $("#tenantTitle").val(response.title);
+                if (response.title == "Other") {
+                    $("#trTenantOtherTitle").show();
+                    $("#tenantOtherTitle").val(response.other_title);
+                } else {
+                    $("#trTenantOtherTitle").hide();
+                }
+                $("#tenantFirstName").val(response.first_name);
+                $("#tenantSurName").val(response.surname);
+                $("#tenantPhone").val(response.phone_number);
+                $("#tenantEmail").val(response.email_address);
+                $("#tenantAddress1").val(response.address_line_1);
+                $("#tenantAddress2").val(response.address_line_2);
+                $("#tenantTown").val(response.town);
+                $("#tenantCountryCity").val(response.country_city);
+                $("#tenantEircode").val(response.eircode);
+                $("#tenantId").val(response._id);
+                $("#btnAddTenant").removeAttr("disabled");
+                $("#btnDeleteTenant").removeAttr("disabled");
+                $("#btnUpdateTenant").removeAttr("disabled");
+            },
+            error: function(xhr, status, error) {
+                alert("Failed to retrive the tenant!");
+            }
+        });
+    } 
+
+    // Display a landlord details from list by _id
+    function editLandlord(id) {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:9000/api/landlords/" + id,
+            success: function(response) {
+                $("#landlordTitle").val(response.title);
+                if (response.title == "Other") {
+                    $("#trLandlordOtherTitle").show();
+                    $("#landlordOtherTitle").val(response.other_title);
+                } else {
+                    $("#trlandlordOtherTitle").hide();
+                }
+                $("#landlordFirstName").val(response.first_name);
+                $("#landlordSurName").val(response.surname);
+                $("#landlordPhone").val(response.phone_number);
+                $("#landlordEmail").val(response.email_address);
+                $("#landlordAddress1").val(response.address_line_1);
+                $("#landlordAddress2").val(response.address_line_2);
+                $("#landlordTown").val(response.town);
+                $("#landlordCountryCity").val(response.country_city);
+                $("#landlordEircode").val(response.eircode);
+                $("#landlordDOB").val(response.date_of_birth);
+                $("#landlordPermissionRent").val(response.permission_rent);
+                $("#landlordPermissionContact").val(response.permission_contact);
+                $("#landlordId").val(response._id);
+                $("#btnAddLandlord").removeAttr("disabled");
+                $("#btnDeleteLandlord").removeAttr("disabled");
+                $("#btnUpdateLandlord").removeAttr("disabled");
+            },
+            error: function(xhr, status, error) {
+                alert("Failed to retrive the landlord!");
+            }
+        });
+    } 
+
+    // Display a contract details from list by _id
+    function editContract(id) {
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:9000/api/contracts/" + id,
+            success: function(response) {
+                $("#contractDate").val(response.contract_date);
+                $("#contractAddress").val(response.contract_address);
+                $("#contractLandlordId").val(response.landlord_id);
+                $("#contractTenantId1").val(response.tenant_id_1);
+                $("#contractTenantId2").val(response.tenant_id_2);
+                $("#contractTenantId3").val(response.tenant_id_3);
+                $("#contractFee").val(response.contract_fee);
+                $("#contractDoorNumber").val(response.door_number);
+                $("#contractLength").val(response.contract_length);
+                $("#contractType").val(response.type);
+                if (response.type == "Other") {
+                    $("#contractOtherType").show();
+                    $("#contractOtherType").val(response.other_type);
+                } else {
+                    $("#contractOtherType").hide();
+                }
+                $("#contractId").val(response._id);
+                $("#btnAddContract").removeAttr("disabled");
+                $("#btnDeleteContract").removeAttr("disabled");
+                $("#btnUpdateContract").removeAttr("disabled");
+            },
+            error: function(xhr, status, error) {
+                alert("Failed to retrive the contract!");
+            }
+        });
+    } 
+
+    // Clear all input/select box for tenant form
+    function clearTenant() {
+        $("#tenantTitle").val("");
+        $("#tenantOtherTitle").val("");
+        $("#trTenantOtherTitle").hide();
+        $("#tenantFirstName").val("");
+        $("#tenantSurName").val(""),
+        $("#tenantPhone").val(""),
+        $("#tenantEmail").val("");  
+        $("#tenantAddress1").val("");
+        $("#tenantAddress2").val("");
+        $("#tenantTown").val("");
+        $("#tenantCountryCity").val("");
+        $("#tenantEircode").val("");
+        $("#tenantId").val("");
+    }
+
+    // Clear all input/select box for landlord form
+    function clearLandlord() {
+        $("#landlordTitle").val("");
+        $("#landlordOtherTitle").val("");
+        $("#trLandlordOtherTitle").hide();
+        $("#landlordFirstName").val("");
+        $("#landlordSurName").val(""),
+        $("#landlordPhone").val(""),
+        $("#landlordEmail").val("");  
+        $("#landlordAddress1").val("");
+        $("#landlordAddress2").val("");
+        $("#landlordTown").val("");
+        $("#landlordCountryCity").val("");
+        $("#landlordEircode").val("");
+        $("#landlordDOB").val("");
+        $("#landlordPermissionRent").val("");
+        $("#landlordPermissionContact").val("");
+        $("#landlordId").val("");
+    }
+
+    // Clear all input/select box for contract form
+    function clearContract() {
+        $("#contractDate").val("");
+        $("#contractAddress").val("");
+        $("#contractLandlordId").val("");
+        $("#contractTenantId1").val(""),
+        $("#contractTenantId2").val(""),
+        $("#contractTenantId3").val("");  
+        $("#contractFee").val("");
+        $("#contractDoorNumber").val("");
+        $("#contractLength").val("");
+        $("#contractType").val("");
+        $("#contractOtherType").val("");
+        $("#trContractOtherType").hide();
+        $("#contractId").val("");
+    }
+
+    // Search tenants
+    // checkExist: used to check if tenant exists
+    function searchTenants(id, checkExist) {
+        var result = true;
+        var searchParms = {};
+        if (id != "") {
+            searchParms._id = id;
+        }
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:9000/api/tenants',
+            data: searchParms,
+            async: !checkExist, 
+            success: function(response) {
+                if (checkExist == false) {
+                    displayTenants(response);
+                }
+            },
+            error: function(xhr, status, error) {   
+                if (id != "") {
+                    alert("Tenant ID \"" + id + "\" does not exist!");
+                } else {
+                    alert("Failed to retrive tenants!");
+                }   
+                result = false; 
+            }                    
+        });
+        return result;           
+    }
+
+    // Search landlords
+    // isCheck: used to check if landlord exists
+    function searchLandlords(id, checkExist) {
+        var result = true;
+        var searchParms = {};
+        if (id != "") {
+            searchParms._id = id;
+        }
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:9000/api/landlords',
+            data: searchParms,
+            async: !checkExist, 
+            success: function(response) {
+                if (checkExist == false) {                    
+                    displayLandlords(response);
+                }
+            },
+            error: function(xhr, status, error) {  
+                if (id != "") {
+                    alert("Landlord ID \"" + id + "\" does not exist!");
+                } else {
+                    alert("Failed to retrive landlords!");
+                }
+                result = false;
+            }                    
+        });  
+        return result;
+    }
+
+    // Search contracts
+    function searchContracts(id) {
+        var searchParms = {};
+        if (id != "") {
+            searchParms._id = id;
+        }
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:9000/api/contracts',
+            data: searchParms,
+            success: function(response) {
+                displayContracts(response);
+            },
+            error: function(xhr, status, error) {   
+                if (id != "") {
+                    alert("Contract ID \"" + id + "\" does not exist!");
+                } else {
+                    alert("Failed to retrive contracts!");
+                } 
+            }                    
+        }); 
+    }
+
+    // Generate tenants table
+    function displayTenants(data) {
+        // Clear content in table
+        var table = document.querySelector("#tenantList");
+        while (table.rows.length > 1) {
+            table.deleteRow(1);
+        }                   
+        data.forEach(function(item) {
+            var tr = document.createElement("tr");
+            // Edit
+            var td = document.createElement("td");
+            td.style.textAlign = "center";
+            var a = document.createElement("a");
+            a.textContent = "Edit";
+            a.href = "javascript:;";                        
+            a.addEventListener("click", function(event) {
+                event.preventDefault();
+                editTenant(item._id);
+            });                        
+            td.appendChild(a);
+            tr.appendChild(td); 
+            // Tenant ID
+            td = document.createElement("td");
+            td.textContent = item._id;
+            td.style.paddingLeft = "2px";
+            tr.appendChild(td);               
+            // First Name
+            td = document.createElement("td");
+            td.textContent = item.first_name;
+            td.style.paddingLeft = "2px";
+            tr.appendChild(td);
+            // Surname
+            td = document.createElement("td");
+            td.textContent = item.surname;
+            td.style.paddingLeft = "2px";
+            tr.appendChild(td);
+            $("#tenantList").append(tr);
+        });                    
+    }  
+    
+    // Generate landlords table
+    function displayLandlords(data) {
+        // Clear content in table
+        var table = document.querySelector("#landlordList");
+        while (table.rows.length > 1) {
+            table.deleteRow(1);
+        }                   
+        data.forEach(function(item) {
+            var tr = document.createElement("tr");
+            // Edit
+            var td = document.createElement("td");
+            td.style.textAlign = "center";
+            var a = document.createElement("a");
+            a.textContent = "Edit";
+            a.href = "javascript:;";                        
+            a.addEventListener("click", function(event) {
+                event.preventDefault();
+                editLandlord(item._id);
+            });                        
+            td.appendChild(a);
+            tr.appendChild(td); 
+            // Landlord ID
+            td = document.createElement("td");
+            td.textContent = item._id;
+            td.style.paddingLeft = "2px";
+            tr.appendChild(td);               
+            // First Name
+            td = document.createElement("td");
+            td.textContent = item.first_name;
+            td.style.paddingLeft = "2px";
+            tr.appendChild(td);
+            // Surname
+            td = document.createElement("td");
+            td.textContent = item.surname;
+            td.style.paddingLeft = "2px";
+            tr.appendChild(td);
+            $("#landlordList").append(tr);
+        });                    
+    }     
+
+    // Generate contracts table
+    function displayContracts(data) {
+        // Clear content in table
+        var table = document.querySelector("#contractList");
+        while (table.rows.length > 1) {
+            table.deleteRow(1);
+        }                   
+        data.forEach(function(item) {
+            var tr = document.createElement("tr");
+            // Edit
+            var td = document.createElement("td");
+            td.style.textAlign = "center";
+            var a = document.createElement("a");
+            a.textContent = "Edit";
+            a.href = "javascript:;";                        
+            a.addEventListener("click", function(event) {
+                event.preventDefault();
+                editContract(item._id);
+            });                        
+            td.appendChild(a);
+            tr.appendChild(td); 
+            // Tenant ID
+            td = document.createElement("td");
+            td.textContent = item._id;
+            td.style.paddingLeft = "2px";
+            tr.appendChild(td);   
+            // Proterty Address
+            td = document.createElement("td");
+            td.textContent = item.contract_address;
+            td.style.paddingLeft = "2px";
+            tr.appendChild(td);  
+            $("#contractList").append(tr);
+        });                    
+    }     
+    </script>
+</body>
+</html>
+
+<!-- 
+    An example of sample routes: 
+    http://localhost:9000/api/tenants  
+-->
