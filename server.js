@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const port = 9000;
 
 // DB connect string
-const uri = "xxxxxxxxxxxxxxx";
+const uri = "MONGO_URI=mongodb+srv://<username>:<password>@cluster0.8pnlvn4.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const Customer = require('./models/tenant.model.js');
 const GymClass = require('./models/landlord.model.js');
 const CustGym = require('./models/contract.model.js');
